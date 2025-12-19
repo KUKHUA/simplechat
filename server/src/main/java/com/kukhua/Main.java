@@ -5,6 +5,7 @@ import io.fusionauth.http.server.HTTPServer;
 import io.fusionauth.http.server.HTTPHandler;
 
 import org.json.JSONObject;
+
 import java.nio.charset.Charset;
 
 public class Main {
@@ -23,22 +24,23 @@ public class Main {
             try {
                 final String body = new String(bodyByteArray, reqCharset);
                 JSONBody = new JSONObject(body);
+                if(JSONBody.getString("request_type") == null){
+                    throw new IllegalArgumentException("No request_type provided.");
+                }
 
             } catch (Exception decodeError){
-                res.setStatus(400);
-                res.setStatusMessage("Error while decoding body: " + decodeError.getMessage());
-                res.getOutputStream().close();
+                Util.closeRes(400, "Error while decoding request" + decodeError.getMessage(), res);
             }
 
 
             //if we got here, bodyText was decoded
-
-
-
-
-            res.setStatus(200);
-            res.setStatusMessage("It works!" + JSONBody.toString());
-            res.getOutputStream().close();
+            // so, send it off to the handler
+            IHandler requestedHandler = HandlerManger.get().findHandler(JSONBody.getString("request_type"));
+            if(requestedHandler != null){
+                requestedHandler.handleRequest(JSONBody, res);
+            } else {
+                Util.closeRes(400, "Provided request_type does not exist.", res);
+            }
 
         };
 

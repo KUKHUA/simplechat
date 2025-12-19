@@ -1,23 +1,26 @@
 package com.kukhua;
 
 import java.util.HashMap;
-import com.kukhua.IHandler;
 
 public class HandlerManger {
-    private HashMap<String, IHandler> lookupHandle = new HashMap();
-    private HandlerManger instance;
+    private HashMap<String, IHandler> lookupHandle = new HashMap<String,IHandler>();
+    private static HandlerManger instance;
 
     private HandlerManger(){
         //all handlers go here:
         //this.lookupHandle.put("whatever", new Handler());
     }
 
-    public HandlerManger get(){
-        if(this.instance == null){
-            this.instance = new HandlerManger();
+    public IHandler findHandler(String handerName){
+        return this.lookupHandle.get(handerName);
+    }
+
+    public static HandlerManger get(){
+        if(instance == null){
+            instance = new HandlerManger();
         }
 
-        return this.instance;
+        return instance;
     }
     
 }
