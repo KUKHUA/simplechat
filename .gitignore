@@ -1,1 +1,4 @@
 *.class
+server/target/classes/com/kukhua/*.class
+server/target/classes/com/kukhua/Main.class
+server/target/classes/com/kukhua/HandlerManger.class

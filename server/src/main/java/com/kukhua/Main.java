@@ -6,6 +6,8 @@ import io.fusionauth.http.server.HTTPHandler;
 
 import org.json.JSONObject;
 
+import com.kukhua.Handlers.IHandler;
+
 import java.nio.charset.Charset;
 
 public class Main {
@@ -16,8 +18,8 @@ public class Main {
             JSONObject JSONBody = new JSONObject("{}");
 
             if(reqCharset == null){
-                //we have no clue wtf the charset is.
-                reqCharset = Charset.defaultCharset(); // just use whatever the system default is, ig.
+                //we have no clue what the charset is.
+                reqCharset = Charset.defaultCharset(); // just use whatever the system default is.
             }
 
 

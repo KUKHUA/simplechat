@@ -2,13 +2,16 @@ package com.kukhua;
 
 import java.util.HashMap;
 
+import com.kukhua.Handlers.IHandler;
+import com.kukhua.Handlers.StreamMessages;
+
 public class HandlerManger {
     private HashMap<String, IHandler> lookupHandle = new HashMap<String,IHandler>();
     private static HandlerManger instance;
 
     private HandlerManger(){
         //all handlers go here:
-        //this.lookupHandle.put("whatever", new Handler());
+        this.lookupHandle.put("StreamMessages", new StreamMessages());
     }
 
     public IHandler findHandler(String handerName){

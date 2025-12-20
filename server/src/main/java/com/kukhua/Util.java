@@ -10,7 +10,7 @@ public class Util {
         try {
             res.getOutputStream().close();
         } catch(Exception exception){
-            // Do nothing for now.
+            //TODO: Do something with the error.
         }
 
     }
