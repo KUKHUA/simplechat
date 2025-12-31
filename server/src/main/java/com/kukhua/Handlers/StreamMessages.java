@@ -22,7 +22,7 @@ public class StreamMessages implements IHandler {
             return;
         } else if(channelName.length() > 15){
             Util.closeRes(400, "channel_name is too long.", res);
-            return;
+            return; 
         }
 
         res.setHeader("Content-Type", "text/event-stream");
@@ -31,7 +31,7 @@ public class StreamMessages implements IHandler {
 
         try {
             res.getOutputStream().write("data: connected\n\n".getBytes());
-           res.getOutputStream().flush();
+            res.getOutputStream().flush();
         } catch (Exception exception){} //TODO: Do something with the error.
 
         ClientStore.get().addClient(channelName, res);
